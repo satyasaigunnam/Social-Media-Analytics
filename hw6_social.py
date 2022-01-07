@@ -62,8 +62,13 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
-
+    for line in fromString.split("\n"):
+        start = line.find("from ") + len("from")
+        line = line[start:]
+        end = line.find(")")
+        line = line[:end]
+        line = line.strip()
+    return line
 
 '''
 findHashtags(message)
@@ -275,6 +280,7 @@ if __name__ == "__main__":
     #test.runWeek1()
     test.testMakeDataFrame()
     test.testParseName()
+    test.testParseState()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
