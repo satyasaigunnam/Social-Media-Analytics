@@ -52,7 +52,13 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    for line in fromString.split("\n"):
+        start = line.find("(") 
+        line = line[start+1:]
+        end = line.find(" from")
+        line = line[:end]
+        line = line.strip()
+    return line
 
 
 '''
@@ -281,6 +287,7 @@ if __name__ == "__main__":
     test.testMakeDataFrame()
     test.testParseName()
     test.testParseState()
+    test.testParsePosition()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
