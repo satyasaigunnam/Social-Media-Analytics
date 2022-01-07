@@ -83,8 +83,19 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
-
+    new_hashtage=message.split("#")
+    hashtage=""
+    list=[]
+    for i in new_hashtage[1:]:
+        for j in i:
+            # print(j)
+            if j not in endChars:
+                hashtage+=j
+            else:
+                break
+        list.append('#'+hashtage)
+        hashtage=""
+    return list
 
 '''
 getRegionFromState(stateDf, state)
@@ -288,6 +299,7 @@ if __name__ == "__main__":
     test.testParseName()
     test.testParseState()
     test.testParsePosition()
+    test.testFindHashtags()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
