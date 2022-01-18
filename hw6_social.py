@@ -216,8 +216,14 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-   
-    return 
+    dicts={}
+    for i in data["hashtags"]:
+        for j in i:
+            if len(j)!=0 and j not in dicts:
+                dicts[j]=1
+            else:
+                dicts[j]+=1
+    return dicts
 
 
 '''
@@ -345,19 +351,20 @@ if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     #test.runWeek1()
     # test.testMakeDataFrame()
-    test.testParseName()
-    test.testParseState()
-    test.testParsePosition()
-    test.testFindHashtags()
-    test.testGetRegionFromState()
-    test.testAddColumns()
-    test.testFindSentiment()
-    df = makeDataFrame("data/politicaldata.csv")
-    stateDf = makeDataFrame("data/statemappings.csv")
-    addColumns(df, stateDf)
-    addSentimentColumn(df)
-    test.testGetDataCountByState(df)
-    test.testGetDataForRegion(df)
+    # test.testParseName()
+    # test.testParseState()
+    # test.testParsePosition()
+    # test.testFindHashtags()
+    # test.testGetRegionFromState()
+    # test.testAddColumns()
+    # test.testFindSentiment()
+    # df = makeDataFrame("data/politicaldata.csv")
+    # stateDf = makeDataFrame("data/statemappings.csv")
+    # addColumns(df, stateDf)
+    # addSentimentColumn(df)
+    # test.testGetDataCountByState(df)
+    # test.testGetDataForRegion(df)
+    
     
     
 
@@ -366,6 +373,11 @@ if __name__ == "__main__":
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()"""
+    df = makeDataFrame("data/politicaldata.csv")
+    stateDf = makeDataFrame("data/statemappings.csv")
+    addColumns(df, stateDf)
+    addSentimentColumn(df)
+    test.testGetHashtagRates(df)
 
     
 
