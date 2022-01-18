@@ -4,6 +4,7 @@ Name:
 Roll Number:
 """
 
+from multiprocessing import Value
 import hw6_social_tests as test
 
 project = "Social" # don't edit this
@@ -144,7 +145,11 @@ Returns: str
 '''
 def findSentiment(classifier, message):
     score = classifier.polarity_scores(message)['compound']
-    return
+    if score<-0.1:
+        return "negative"
+    if score>0.1:
+        return "positive"
+    return "neutral"
 
 
 '''
@@ -155,7 +160,11 @@ Returns: None
 '''
 def addSentimentColumn(data):
     classifier = SentimentIntensityAnalyzer()
-    return
+    list=[]
+    for i,j in data.iterrows():
+        list.append(findSentiment(classifier,j['text']))
+    data['sentiment']=list
+    return None
 
 
 '''
@@ -319,6 +328,7 @@ if __name__ == "__main__":
     test.testFindHashtags()
     test.testGetRegionFromState()
     test.testAddColumns()
+    test.testFindSentiment()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
